@@ -15,6 +15,7 @@ Press 'q' to quit the detection window.
 import os
 import sys
 import django
+import signal
 
 # Setup Django environment
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -24,12 +25,45 @@ django.setup()
 from datetime import datetime
 import cv2
 import face_recognition
+import time
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from missingperson.models import MissingPerson
 
+# Global variable to track video capture
+video_capture = None
+
+def cleanup_camera():
+    """Cleanup function to ensure camera is properly released"""
+    global video_capture
+    
+    if video_capture is not None and video_capture.isOpened():
+        print("\n🔄 Cleaning up camera resources...")
+        video_capture.release()
+        video_capture = None
+    
+    cv2.destroyAllWindows()
+    
+    # Force cleanup of OpenCV windows
+    for _ in range(5):
+        cv2.waitKey(1)
+    
+    time.sleep(0.3)
+
+def signal_handler(sig, frame):
+    """Handle Ctrl+C gracefully"""
+    print("\n\n⚠️  Interrupted! Releasing camera...")
+    cleanup_camera()
+    print("✅ Camera released. Exiting...")
+    sys.exit(0)
+
+# Register signal handler
+signal.signal(signal.SIGINT, signal_handler)
+
 def run_detection():
     """Run face detection using webcam"""
+    global video_capture
+    
     print("=" * 60)
     print("  GharTak Mission - Face Detection Mode")
     print("=" * 60)
@@ -157,9 +191,8 @@ def run_detection():
     except Exception as e:
         print(f"\n❌ Error during detection: {e}")
     finally:
-        video_capture.release()
-        cv2.destroyAllWindows()
-        print("✅ Camera released")
+        cleanup_camera()
+        print("✅ Camera released successfully")
         print("=" * 60)
         print("Thank you for using GharTak Mission!")
         print("=" * 60)
