@@ -146,6 +146,15 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', default='webmaster@localhost')
 
+# Production Database Configuration (PostgreSQL)
+# If DATABASE_URL is set, use it instead of default SQLite
+import dj_database_url
+DATABASE_URL = config('DATABASE_URL', default='')
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+
 # Security Settings for Production
 if not DEBUG:
     SECURE_SSL_REDIRECT = True

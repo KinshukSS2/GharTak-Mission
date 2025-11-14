@@ -5,9 +5,23 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from datetime import datetime
-import face_recognition
-import cv2
-from twilio.rest import Client
+
+# Optional imports for face detection
+try:
+    import face_recognition
+    import cv2
+    FACE_DETECTION_AVAILABLE = True
+except ImportError:
+    FACE_DETECTION_AVAILABLE = False
+    print("⚠️  Warning: face_recognition/cv2 not installed. Face detection features will be disabled.")
+
+# Optional Twilio import
+try:
+    from twilio.rest import Client
+    TWILIO_AVAILABLE = True
+except ImportError:
+    TWILIO_AVAILABLE = False
+
 from .models import MissingPerson, Location
 
 #Add yourr own credentials
@@ -48,6 +62,12 @@ def detect(request):
     WARNING: This will block the server until detection is stopped (press 'q')
     For production, use the standalone script: run_face_detection.py
     """
+    if not FACE_DETECTION_AVAILABLE:
+        messages.warning(request, 
+            'Face detection is not available. Please install face_recognition and opencv-python packages. '
+            'For now, use the web interface for registration only.')
+        return redirect('surveillance')
+    
     try:
         video_capture = cv2.VideoCapture(0)
         
