@@ -7,7 +7,7 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ---
 
-## 🌟 Features
+##  Features
 
 ###  Missing Person Registration  
 - Register individuals with photographs and complete personal details.
