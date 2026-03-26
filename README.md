@@ -9,24 +9,24 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ## 🌟 Features
 
-### 👤 Missing Person Registration  
+###  Missing Person Registration  
 - Register individuals with photographs and complete personal details.
 
-### 🎥 Facial Recognition  
+###  Facial Recognition  
 - Automated face detection and matching using OpenCV + `face_recognition`.
 
-### 📩 Real-Time Alerts  
+### Real-Time Alerts  
 - Sends email notifications to parents/guardians and authorities when a match is found.
 
-### 📍 Location Tracking  
+###  Location Tracking  
 - Stores last known locations in a secure database.
 
-### 🛠️ Admin Dashboard  
+###  Admin Dashboard  
 - Admins can manage, update, and close missing-person cases.
 
 ---
 
-## 🔎 How It Works
+##  How It Works
 
 1. **Register a Missing Person**  
    Upload a photo and provide essential details like name, address, Aadhar number, email, and phone number.
@@ -42,7 +42,7 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ---
 
-## 🧰 Technology Stack
+##  Technology Stack
 
 - **Backend:** Django (Python)  
 - **Frontend:** HTML, CSS, JavaScript  
@@ -51,7 +51,7 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - AI/ML-based advanced facial recognition models  
 - Real-time geospatial tracking  
@@ -61,7 +61,7 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ---
 
-## ⚙️ Quick Start
+##  Quick Start
 
 ### ✔ Prerequisites
 - Python 3.8+  
@@ -70,9 +70,4 @@ Built using **Django**, **OpenCV**, **face_recognition**, and a clean **HTML/CSS
 
 ---
 
-## 🧑‍💻 Installation
 
-### 1️⃣ Clone the Repository
-```bash
-git clone <repository-url>
-cd GharTak-Mission
